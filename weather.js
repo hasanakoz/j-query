@@ -56,6 +56,22 @@ const getWeatherDataFromApi = () => {
       const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
 
       //weather card control
+      const cityCardList = listJQ.find(".city");
+      const cityCardListArray = cityCardList.get();
+
+      if (cityCardListArray.length > 0) {
+        const filteredArray = cityCardListArray.filter(
+          (li) => $(li).find("span").text() == name
+        );
+        if (filteredArray.length > 0) {
+          msgJQ.text(
+            `You already know the weather for ${name}, Please search for another city :wink:`
+          );
+
+          msgJQ.css({ color: "red" });
+          return;
+        }
+      }
 
       const createdLi = $("<li></li>");
       createdLi.addClass("city");
@@ -81,7 +97,7 @@ const getWeatherDataFromApi = () => {
       console.log("after ajax send");
     },
     error: (XMLHttpRequest) => {
-      console.log(XMLHttpRequest);
+      msgJQ.text(`${XMLHttpRequest.status} ${XMLHttpRequest.statusText}`);
     },
   });
 };
