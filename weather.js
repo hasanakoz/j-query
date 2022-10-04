@@ -2,8 +2,8 @@ const formJS = document.querySelector("form");
 
 //jQuery = $
 const formJquery = $("form").eq(0);
-const inputJQ = $("top-banner input").eq(0);
-const msgJQ = $("top-banner span").eq(0);
+const inputJQ = $(".top-banner input").eq(0);
+const msgJQ = $(".top-banner span").eq(0);
 const listJQ = $(".cities").eq(0);
 // console.log(listJQ);
 // console.log(formJquery);
@@ -55,8 +55,24 @@ const getWeatherDataFromApi = () => {
       //alternative iconUrl
       const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
 
+      //weather card control
+
       const createdLi = $("<li></li>");
       createdLi.addClass("city");
+      createdLi.html(`
+      <h2 class="city-name" data-name="${name}, ${sys.country}">
+          <span>${name}</span>
+          <sup>${sys.country}</sup>
+      </h2>
+      <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup></div>
+      <figure>
+          <img class="city-icon" src="${iconUrl}">
+          <figcaption>${weather[0].description}</figcaption>
+      </figure>`);
+
+      listJQ.prepend(createdLi);
+      //   formJS.reset();
+      formJquery.trigger("reset");
     },
     beforeSend: (request) => {
       console.log("before ajax send");
