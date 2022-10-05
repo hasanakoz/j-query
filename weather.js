@@ -96,6 +96,10 @@ const getWeatherDataFromApi = () => {
         $(e.target).animate({ left: "250px" });
       });
 
+      $(".city img").click((e) => {
+        $(e.target).slideUp(1000).slideDown(1000);
+      });
+
       //   formJS.reset();
       formJquery.trigger("reset");
     },
