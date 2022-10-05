@@ -87,6 +87,15 @@ const getWeatherDataFromApi = () => {
       </figure>`);
 
       listJQ.prepend(createdLi);
+
+      $(".city img").click((e) => {
+        $(e.target).attr("src", iconUrlAWS);
+      });
+
+      $(".city").click((e) => {
+        $(e.target).animate({ left: "250px" });
+      });
+
       //   formJS.reset();
       formJquery.trigger("reset");
     },
